@@ -1,13 +1,14 @@
 {
-  "name": "jobs",
+  "name": "task-manager",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "abdulbasit",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
