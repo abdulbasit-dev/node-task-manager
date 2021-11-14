@@ -1,5 +1,5 @@
 {
-  "name": "task-manager",
+  "name": "jobs",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,7 +8,7 @@
     "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "abdulbasit",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",

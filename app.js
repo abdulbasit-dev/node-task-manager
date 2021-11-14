@@ -1,24 +1,32 @@
 const express = require('express');
-require('dotenv').config();
-const { MongoClient } = require('mongodb');
-const route = require('./routes/route')
-
-//create app
 const app = express();
-const port = process.env.PORT || 8000;
-//set static folder
-app.use(express.static('public'))
+const tasks = require('./routes/tasks');
+const connectDB = require('./db/connect');
+require('dotenv').config();
+const notFound = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
-//middlwares
-//to cacth request body parameters 
-app.use(express.json);
+// middleware
+app.use(express.static('./public'));
+app.use(express.json());
 
+// routes
 
-//route
-app.get('/',(req,res)=>{
-  return res.send("sas")
-})
+app.use('/api/v1/tasks', tasks);
 
-app.use('/api/v1', route)
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+const port = process.env.PORT || 5000;
 
-app.listen(port, ()=>console.log(`server run on port ${port}...`))
+const start = async () => {
+  try {
+    await connectDB('mongodb+srv://test_user:crrkWY1v8a4D17qN@taskcluster.efnyo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+    app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
